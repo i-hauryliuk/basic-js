@@ -1,4 +1,7 @@
-module.exports = function countCats(/* matrix */) {
-  throw 'Not implemented';
-  // remove line with error and write your code here
+module.exports = function countCats(backyard) {
+  let catsTotal = 0;
+  backyard.forEach(el => {
+    catsTotal += el.filter(el => el === '^^').length;
+  });
+  return catsTotal;
 };
