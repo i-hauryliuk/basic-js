@@ -1,23 +1,41 @@
 const chainMaker = {
   getLength() {
-    throw 'Not implemented';
-    // remove line with error and write your code here
+    return this.chain && Array.isArray(this.chain) ? this.chain.length : 0;
   },
   addLink(value) {
-    throw 'Not implemented';
-    // remove line with error and write your code here
+    const realValue = value === undefined ? '( )' : `( ${value} )`;
+    if (!this.chain) {
+      this.chain = [realValue];
+    } else if (Array.isArray(this.chain)) {
+      this.chain.push(realValue);
+    }
+    return this;
   },
   removeLink(position) {
-    throw 'Not implemented';
-    // remove line with error and write your code here
+    if (!Number.isInteger(position) || position < 1 || position > this.getLength()) {
+      this.finishChain();
+      throw new TypeError('Invalid argument!');
+    } else if (this.chain && Array.isArray(this.chain)){
+      this.chain.splice(position - 1, 1);
+    }
+    return this;
   },
   reverseChain() {
-    throw 'Not implemented';
-    // remove line with error and write your code here
+    if (this.chain && Array.isArray(this.chain)) {
+      this.chain.reverse();
+    }
+    return this;
   },
   finishChain() {
-    throw 'Not implemented';
-    // remove line with error and write your code here
+    if (this.chain && Array.isArray(this.chain)) {
+      try {
+        throw this.chain.join('~~');
+      } catch (finalChain) {
+        return finalChain;
+      } finally {
+        delete this.chain;
+      }
+    }
   }
 };
 
